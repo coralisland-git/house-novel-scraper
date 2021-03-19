@@ -11,6 +11,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(1600, 1200))
+display.start()
 
 class Rchs_pastperfectonline_com:
     name = 'rchs_pastperfectonline_com'
@@ -21,7 +24,8 @@ class Rchs_pastperfectonline_com:
         self.db, self.cursor = connect_mysql_db()
         self.session = requests.Session()
         options = Options()
-        self.driver = webdriver.Chrome('./chromedriver.exe', options=options)        
+        # self.driver = webdriver.Chrome('./chromedriver.exe', options=options)
+        self.driver = webdriver.Chrome(chrome_options=options)
         self.start_requests()        
     
     def start_requests(self):

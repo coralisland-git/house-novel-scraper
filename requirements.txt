@@ -3,3 +3,4 @@ requests
 pytest-shutil
 pymysql
 selenium
+pyvirtualdisplay
