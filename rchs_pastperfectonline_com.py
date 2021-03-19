@@ -25,7 +25,7 @@ class Rchs_pastperfectonline_com:
         self.session = requests.Session()
         options = Options()
         # self.driver = webdriver.Chrome('./chromedriver.exe', options=options)
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(options=options)
         self.start_requests()        
     
     def start_requests(self):
