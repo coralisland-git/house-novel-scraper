@@ -3,8 +3,6 @@ from lxml import etree
 import json
 import pdb
 from base import *
-import usaddress
-
 
 class Historichomesofminnesota_com:
     name = 'historichomesofminnesota_com'
