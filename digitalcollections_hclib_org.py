@@ -25,7 +25,7 @@ class Digitalcollections_hclib_org:
         try:
             page_num = 1
             while True:
-                url = 'https://digitalcollections.hclib.org/digital/api/search/collection/p17208coll13/searchterm/Still%20Image/field/type/mode/exact/conn/and/order/title/ad/asc/page/{page_num}/maxRecords/1000'
+                url = f'https://digitalcollections.hclib.org/digital/api/search/collection/p17208coll13/searchterm/Still%20Image/field/type/mode/exact/conn/and/order/title/ad/asc/page/{page_num}/maxRecords/1000'
                 response = self.session.get(url, headers=self.headers)
                 collections = json.loads(response.text).get('items', [])
                 if collections == []:
