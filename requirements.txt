@@ -1,0 +1,5 @@
+lxml
+requests
+pytest-shutil
+pymysql
+selenium

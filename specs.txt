@@ -1,0 +1,7 @@
+https://digitalcollections.hclib.org/digital/collection/p17208coll13/search/searchterm/Still%20Image/field/type/mode/exact/conn/and/order/title/ad/asc 
+https://search.mnhs.org/index.php?subject[]=Residences&collection[]=mn_mhs-cms
+https://www.loc.gov/collections/ historic-american-buildings-landscapes-and-engineering-records/?fa=online-format:image
+http://www.stillwater-mn.org/hpc/Sample_interface/Categories/Sum-Address.asp
+https://rchs.pastperfectonline.com/search?page=4&search_criteria=house&utf8=%E2%9C%93 (*keyword, "house") 
+https://historichomesofminnesota.com/
+https://duluthpreservation.org/property/
