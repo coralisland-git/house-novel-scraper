@@ -24,12 +24,12 @@ class Loc_gov:
         try:
             page_num = 1
             while True:
-                url = 'https://www.loc.gov/collections/historic-american-buildings-landscapes-and-engineering-records/?c=150&fa=online-format:image&sp={page_num}&st=list'
+                url = f'https://www.loc.gov/collections/historic-american-buildings-landscapes-and-engineering-records/?c=1000&fa=online-format:image&sp={page_num}&st=list'
                 response = self.session.get(url, headers=self.headers)
                 tree = etree.HTML(response.text)
                 collections = tree.xpath('//span[@class="item-description-title"]//a')
                 if collections == []:
-                    break
+                    break                
                 for collection in collections:
                     c_url = validate(collection.xpath('./@href'))
                     self.parse_collection(c_url)

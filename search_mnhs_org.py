@@ -30,11 +30,11 @@ class Search_mnhs_org:
                 tree = etree.HTML(response.text)
                 collections = tree.xpath('//div[@id="main-content"]//span[@class="list_right"]//strong[@class="item-title"]//a')
                 if collections == []:
-                    break
+                    break                
                 for collection in collections:
                     c_url = validate(collection.xpath('./@href'))
                     self.parse_collection(c_url)
-                page_num += 1
+                page_num += 100
         except Exception as e:
             print(e)
     
@@ -62,19 +62,22 @@ class Search_mnhs_org:
                     try:
                         addrs = values[0].split(':')[-1].split(', ')
                         if len(addrs) == 5:
-                            addr, data['city'], data['county'], data['state'], country = addrs                            
+                            addr, data['city'], data['county'], data['state'], country = addrs
                             if 'neighborhood' in addr.lower():
                                 data['neighborhood'] = addr
                             else:
                                 data['street_address'] = addr
                         else:
-                            data['city'], data['county'], data['state'], country = addrs
+                            try:
+                                data['city'], data['county'], data['state'], country = addrs
+                            except:
+                                pass
                     except:
                         pass
 
             thumbnail_url = validate(c_tree.xpath('.//div[@class="item-group"]//img/@src'))
-            if thumbnail_url != '':
-                data['thumbnail_url'] = f'http://collections.mnhs.org/cms/{thumbnail_url}'
+            # if thumbnail_url != '':
+            #     data['thumbnail_url'] = f'http://collections.mnhs.org/cms/{thumbnail_url}'
             data['source'] = 'Search the Minnesota Historical Society'
             data['source_url'] = c_url            
             c_id = c_url.split('?irn=')[1].split('&')[0]
