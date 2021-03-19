@@ -57,11 +57,14 @@ class Loc_gov:
             data['source'] = 'Library of Congress'
             data['source_url'] = c_url
             data['subject'] = validate(c_tree.xpath('.//h1//cite//text()'))
-            addrs = eliminate_space(data['subject'].split(','))
-            data['street_address'] = addrs[-4]
-            data['city'] = addrs[-3]
-            data['state'] = addrs[-1]
-            data['county'] = addrs[-2]
+            try:
+                addrs = eliminate_space(data['subject'].split(','))
+                data['street_address'] = addrs[-4]
+                data['city'] = addrs[-3]
+                data['state'] = addrs[-1]
+                data['county'] = addrs[-2]
+            except:
+                pass
             data['uuid'] = generate_uuid(f'loc_{c_id}')
             if data['photo_url'] != '':
                 data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"
