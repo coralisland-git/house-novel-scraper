@@ -25,7 +25,7 @@ class Search_mnhs_org:
         try:
             page_num = 1
             while True:
-                url = 'https://search.mnhs.org/index.php?collection[]=mn_mhs-cms&subject[]=Residences&count=100&startindex=1'
+                url = f'https://search.mnhs.org/index.php?collection[]=mn_mhs-cms&subject[]=Residences&count=100&startindex={page_num}'
                 response = self.session.get(url, headers=self.headers)
                 tree = etree.HTML(response.text)
                 collections = tree.xpath('//div[@id="main-content"]//span[@class="list_right"]//strong[@class="item-title"]//a')
