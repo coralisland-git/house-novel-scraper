@@ -25,7 +25,7 @@ class Stillwater_mn_org:
             url = 'http://www.stillwater-mn.org/hpc/api/ListWebPropertyAddresses?sort=&group=&filter='
             response = self.session.get(url, headers=self.headers)
             collections = json.loads(response.text).get('Data', [])
-            for collection in collections[:1]:
+            for collection in collections:
                 self.parse_collection(collection)
         except Exception as e:
             print(e)
