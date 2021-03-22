@@ -43,7 +43,7 @@ class Stillwater_mn_org:
             c_response = self.session.get(c_url, headers=headers)
             c_tree = etree.HTML(c_response.text)
             data = {}
-            data['caption'] = validate(c_tree.xpath('.//p[@class="lead"]//text()'))
+            data['public_history'] = validate(c_tree.xpath('.//p[@class="lead"]//text()'))
             data['source'] = 'Heirloom Homes and Landmark'
             data['subject'] = validate(collection.get('PropertyName', ''))
             data['city'] = 'City of Stillwater'
@@ -52,7 +52,9 @@ class Stillwater_mn_org:
             data['street_address'] = validate(collection.get('FullAddress', ''))
             fields = c_tree.xpath('.//div[@class="row featurette"]')[-1].xpath('./div/p')
             for field in fields:
-                key = validate(field.xpath('.//span[@class="property-field"]//text()')).lower()                
+                key = validate(field.xpath('.//span[@class="property-field"]//text()')).lower()
+                if 'common property name' in key:
+                    data['caption'] = validate(c_tree.xpath('.//span[@class="property-value"]//text()'))
                 if 'construction date' in key:
                     data['year_built'] = validate(field.xpath('.//span[@class="property-value"]//text()'))
                 if 'state historic preservation office inventory number' in key:

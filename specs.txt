@@ -6,5 +6,5 @@ https://www.loc.gov/collections/ historic-american-buildings-landscapes-and-engi
 
 http://www.stillwater-mn.org/hpc/Sample_interface/Categories/Sum-Address.asp
 https://rchs.pastperfectonline.com/search?page=4&search_criteria=house&utf8=%E2%9C%93 (*keyword, "house") - 2095
-https://historichomesofminnesota.com/
+https://historichomesofminnesota.com/ - 191
 https://duluthpreservation.org/property/

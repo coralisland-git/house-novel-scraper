@@ -29,7 +29,7 @@ class Historichomesofminnesota_com:
                 collections = tree.xpath('.//a[@class="thumbnail-wrapper"]/@href')
                 if collections == []:
                     break
-                for c_url in collections:                    
+                for c_url in collections:
                     self.parse_collection(c_url)
                 page_num += 1
         except Exception as e:
