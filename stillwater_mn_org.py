@@ -54,7 +54,7 @@ class Stillwater_mn_org:
             for field in fields:
                 key = validate(field.xpath('.//span[@class="property-field"]//text()')).lower()
                 if 'common property name' in key:
-                    data['caption'] = validate(c_tree.xpath('.//span[@class="property-value"]//text()'))
+                    data['caption'] = validate(field.xpath('.//span[@class="property-value"]//text()'))
                 if 'construction date' in key:
                     data['year_built'] = validate(field.xpath('.//span[@class="property-value"]//text()'))
                 if 'state historic preservation office inventory number' in key:
