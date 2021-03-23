@@ -38,7 +38,8 @@ class Duluthpreservation_org:
             c_response = self.session.get(c_url, headers=self.headers)
             c_tree = etree.HTML(c_response.text)
             data = {}
-            data['caption'] = validate(c_tree.xpath('.//div[@class="entry-content"]/p//text()'))
+            data['caption'] = validate(c_tree.xpath('.//p[@class="header-address"]//text()'))
+            data['public_history'] = validate(c_tree.xpath('.//div[@class="entry-content"]/p//text()'))
             data['source'] = 'Duluth Preservation Alliance'
             data['source_url'] = c_url
             year_and_sub = eliminate_space(validate(collection.xpath('.//small//text()')).replace(',', '').split('|'))

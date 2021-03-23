@@ -17,7 +17,7 @@ class Historichomesofminnesota_com:
             'upgrade-insecure-requests': '1',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
         }
-        self.start_requests()        
+        self.start_requests()
     
     def start_requests(self):
         try:
@@ -40,10 +40,16 @@ class Historichomesofminnesota_com:
             c_id = eliminate_space(c_url.split('/'))[-1].replace('-', '_')
             c_response = self.session.get(c_url, headers=self.headers)
             c_tree = etree.HTML(c_response.text)
-            data = {}            
-            # data['source'] = eliminate_space(c_tree.xpath('.//div[contains(@id, "post")]/h2//text()'))[0]
+            data = {}
             data['source'] = 'Historic Homes of Minnesota'
             data['source_url'] = c_url
+            histories = eliminate_space(c_tree.xpath('.//div[@class="entry"]/p//text()'))
+            public_history = []
+            for history in histories:
+                if 'tags:' in history.lower() or 'this entry was' in history.lower():
+                    break
+                public_history.append(history)
+            data['public_history'] = ' '.join(public_history)
             data['subject'] = validate(c_tree.xpath('.//p[@class="postmetadata alt"]//a[@rel="category tag"]//text()'))
             try:
                 data['street_address'] = eliminate_space(c_tree.xpath('//p[@class="wp-caption-text"]//text() | //figcaption//text()'))[0]
@@ -53,6 +59,7 @@ class Historichomesofminnesota_com:
             
             data['uuid'] = generate_uuid(f'hhm_{c_id}')
             photo_urls = eliminate_space(c_tree.xpath('.//div[contains(@id, "post")]//img/@src'))
+
             if len(photo_urls) != 0:
                 data['photo_url'] = photo_urls[0]
                 data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"                
