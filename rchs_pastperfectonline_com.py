@@ -75,6 +75,7 @@ class Rchs_pastperfectonline_com:
                     data['national_register_of_historic_places'] = value
 
             data['photo_decade'] = ''
+            data['user_comments'] = ''
             data['source'] = 'Ramsey County Historical Society'
             data['city'] = 'St. Paul'
             data['state'] = 'Minnesota'
