@@ -70,7 +70,7 @@ class Rchs_pastperfectonline_com:
                 if key == 'subjects':
                     data['subject'] = value
                 if key == 'notes':
-                    data['user_comments'] = value
+                    data['public_history'] = value
                 if key == 'catalog number':
                     data['national_register_of_historic_places'] = value
 
