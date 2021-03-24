@@ -77,6 +77,7 @@ class Rchs_pastperfectonline_com:
             data['photo_decade'] = ''
             data['user_comments'] = ''
             data['source'] = 'Ramsey County Historical Society'
+            data['source_url'] = c_url
             data['city'] = 'St. Paul'
             data['state'] = 'Minnesota'
             data['street_address'] = ''
