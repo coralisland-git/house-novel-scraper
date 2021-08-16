@@ -80,9 +80,10 @@ class Digitalcollections_hclib_org:
                 data['thumbnail_url'] = f"https://digitalcollections.hclib.org/digital{thumbnail_url}"
             photo_url = validate(c_info.get('imageUri', ''))
             if photo_url != '':
-                data['photo_url'] = f"https://digitalcollections.hclib.org/digital{photo_url}"
+                # data['photo_url'] = f"https://digitalcollections.hclib.org/digital{photo_url}"
+                data['photo_url'] = f"https://digitalcollections.hclib.org/digital/iiif/p17208coll13/{c_info.get('id', '')}/full/1024,/0/default.jpg?highlightTerms="
                 data['photo_location'] = f"photos/{self.name}/{c_info.get('id', '')}.jpg"
-                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
+                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])            
             insert_data_into_mysql_db(self.db, self.cursor, data)
         except Exception as e:
             print('parse_collection: ', e)
