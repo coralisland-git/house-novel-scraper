@@ -84,10 +84,10 @@ class Rchs_pastperfectonline_com:
             data['uuid'] = generate_uuid(f'rchs_{c_id}')
             photo_urls = eliminate_space(c_tree.xpath('.//div[contains(@class, "largeImage")]//img/@src'))
             if len(photo_urls) > 0:
-                data['photo_url'] = photo_urls[0]
+                data['thumbnail_url'] = photo_urls[0]
+                data['photo_url'] = photo_urls[0].replace('thumbs/', '')
                 data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"
-                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
-
+                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])            
             insert_data_into_mysql_db(self.db, self.cursor, data)
         except Exception as e:
             print(e)

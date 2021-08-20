@@ -10,7 +10,6 @@ class Duluthpreservation_org:
     base_url = 'https://duluthpreservation.org'
 
     def __init__(self):
-        self.db, self.cursor = connect_mysql_db()
         self.session = requests.Session()
         self.headers = {
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -54,10 +53,9 @@ class Duluthpreservation_org:
             data['uuid'] = generate_uuid(f'dpa_{c_id}')
             photo_url = validate(c_tree.xpath('.//div[@id="header-image"]//img/@src'))
             if photo_url != '':
-                data['photo_url'] = f'{self.base_url}{photo_url}'
+                data['photo_url'] = photo_url
                 data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"
-                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
-
+                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])            
             insert_data_into_mysql_db(self.db, self.cursor, data)
         except Exception as e:
             print(e)

@@ -75,15 +75,16 @@ class Search_mnhs_org:
                     except:
                         pass
 
-            thumbnail_url = validate(c_tree.xpath('.//div[@class="item-group"]//img/@src'))
-            # if thumbnail_url != '':
-            #     data['thumbnail_url'] = f'http://collections.mnhs.org/cms/{thumbnail_url}'
             data['source'] = 'Search the Minnesota Historical Society'
             data['source_url'] = c_url
             c_id = c_url.split('?irn=')[1].split('&')[0]
             data['uuid'] = generate_uuid(f"mnhs_{c_id}")
-            # download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
-
+            thumbnail_url = validate(c_tree.xpath('.//div[@class="item-group"]//img/@src'))
+            if thumbnail_url != '':
+                data['thumbnail_url'] = f'http://collections.mnhs.org/cms/{thumbnail_url}'
+                data['photo_url'] = data['thumbnail_url'].replace('&kind=thumbnail', '')
+                data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"
+                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
             insert_data_into_mysql_db(self.db, self.cursor, data)
         except Exception as e:
             print(e)
