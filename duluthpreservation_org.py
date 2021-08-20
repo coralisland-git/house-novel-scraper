@@ -10,6 +10,7 @@ class Duluthpreservation_org:
     base_url = 'https://duluthpreservation.org'
 
     def __init__(self):
+        self.db, self.cursor = connect_mysql_db()
         self.session = requests.Session()
         self.headers = {
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
