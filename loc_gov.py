@@ -52,7 +52,7 @@ class Loc_gov:
                     if key == 'repository':
                         data['national_register_of_historic_places'] = validate(fields[idx+1].xpath('.//a/@href'))
 
-            data['photo_url'] = validate(c_tree.xpath('.//img[@class="iconic screen-dependent-image"]/@src'))
+            data['photo_url'] = validate(c_tree.xpath('.//img[@class="iconic screen-dependent-image"]/@src')).replace('p_150px.jpg', 'pv.jpg#h=814&w=1024')
             # data['source'] = validate(c_tree.xpath('.//a[@class="format-label"]//text()'))
             data['source'] = 'Library of Congress'
             data['source_url'] = c_url
@@ -68,8 +68,7 @@ class Loc_gov:
             data['uuid'] = generate_uuid(f'loc_{c_id}')
             if data['photo_url'] != '':
                 data['photo_location'] = f"photos/{self.name}/{c_id}.jpg"
-                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])            
-
+                download_photo(self.session, data['photo_url'], {}, f"photos/{self.name}", data['photo_location'])
             insert_data_into_mysql_db(self.db, self.cursor, data)
         except Exception as e:
             print(e)
